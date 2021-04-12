@@ -72,4 +72,29 @@ def hinge_loss_single(feature_vector, label, theta, theta_0):
 
 Now it's time to implement the complete hinge loss for a full set of data. Your input will be a full feature matrix this time, and you will have a vector of corresponding labels. The k-th row of the feature matrix corresponds to the k-th element of the labels vector. This function should return the appropriate loss of the classifier on the given dataset.
 
+```python
+def hinge_loss_full(feature_matrix, labels, theta, theta_0):
+    """
+    Finds the total hinge loss on a set of data given specific classification
+    parameters.
 
+    Args:
+        feature_matrix - A numpy matrix describing the given data. Each row
+            represents a single data point.
+        labels - A numpy array where the kth element of the array is the
+            correct classification of the kth row of the feature matrix.
+        theta - A numpy array describing the linear classifier.
+        theta_0 - A real valued number representing the offset parameter.
+
+
+    Returns: A real number representing the hinge loss associated with the
+    given dataset and parameters. This number should be the average hinge
+    loss across all of the points in the feature matrix.
+    """
+    Z = 0
+    for i in range(len(feature_matrix)):
+        Z += hinge_loss_single(feature_matrix[i], labels[i], theta, theta_0)
+    return Z / len(labels)
+
+    raise NotImplementedError
+```
