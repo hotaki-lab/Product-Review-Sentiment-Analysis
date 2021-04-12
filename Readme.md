@@ -34,7 +34,7 @@ utils.py contains utility functions that the staff has implemented for you.
 
 test.py is a script which runs tests on a few of the methods you will implement. Note that these tests are provided to help you debug your implementation and are not necessarily representative of the tests used for online grading. Feel free to add more test cases locally to further validate the correctness of your code before submitting to the online graders in the codeboxes.
 
-# Hinge Loss:
+# Defining a Hinge Loss Function:
 
 In this project you will be implementing linear classifiers beginning with the Perceptron algorithm. You will begin by writing your loss function, a hinge-loss function. For this function you are given the parameters of your model θ and θ0. Additionally, you are given a feature matrix in which the rows are feature vectors and the columns are individual features, and a vector of labels representing the actual sentiment of the corresponding feature vector.
 
@@ -94,7 +94,7 @@ def hinge_loss_full(feature_matrix, labels, theta, theta_0):
     raise NotImplementedError
 ```
 
-# Perceptron Algorithm:
+# Applying the Perceptron Algorithm:
 
 ## Perceptron Single Step Update:
 
@@ -134,7 +134,7 @@ def perceptron_single_step_update(
     raise NotImplementedError
 ```
 
-## Full Perceptron Algorithm:
+## Applying Full Perceptron Algorithm:
 
 In this step you will implement the full perceptron algorithm. You will be given the same feature matrix and labels array as you were given in The Complete Hinge Loss. You will also be given T, the maximum number of times that you should iterate through the feature matrix before terminating the algorithm. Initialize θ and θ_0 to zero. This function should return a tuple in which the first element is the final value of θ and the second element is the value of θ0.
 
@@ -173,3 +173,20 @@ def perceptron(feature_matrix, labels, T):
 ```
 
 ![alt text](https://github.com/hotaki-lab/Product-Review-Sentiment-Analysis/blob/main/Figure_1%20(perceptron).png "Perceptron Application on Toy Dataset")
+
+# Average Perceptron Algorithm:
+
+The average perceptron will add a modification to the original perceptron algorithm: since the basic algorithm continues updating as the algorithm runs, nudging parameters in possibly conflicting directions, it is better to take an average of those parameters as the final answer. Every update of the algorithm is the same as before. The returned parameters θ, however, are an average of the θs across the nT steps:
+
+θfinal=1nT(θ(1)+θ(2)+...+θ(nT))
+
+You will now implement the average perceptron algorithm. This function should be constructed similarly to the Full Perceptron Algorithm above, except that it should return the average values of θ and θ0
+
+Tip: Tracking a moving average through loops is difficult, but tracking a sum through loops is simple.
+
+Note: Please call get_order(feature_matrix.shape[0]), and use the ordering to iterate the feature matrix in each iteration. The ordering is specified due to grading purpose. In practice, people typically just randomly shuffle indices to do stochastic optimization.
+
+\frac{n!}{k!(n-k)!}
+$\binom{n}{k}$	\binom{n}{k}
+$\frac{\frac{x}{1}}{x - y}$	\frac{\frac{x}{1}}{x - y}
+$^3/_7$	^3/_7
