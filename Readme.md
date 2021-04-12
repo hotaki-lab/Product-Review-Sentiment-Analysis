@@ -171,3 +171,5 @@ def perceptron(feature_matrix, labels, T):
         
     raise NotImplementedError
 ```
+
+![alt text][Figure_1 (perceptron)]
