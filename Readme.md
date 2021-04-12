@@ -172,4 +172,4 @@ def perceptron(feature_matrix, labels, T):
     raise NotImplementedError
 ```
 
-![alt text][Figure_1 (perceptron)]
+![alt text](https://github.com/hotaki-lab/Product-Review-Sentiment-Analysis/blob/main/Figure_1%20(perceptron).png "Perceptron Application on Toy Dataset")
