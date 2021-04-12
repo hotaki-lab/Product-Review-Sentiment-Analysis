@@ -38,7 +38,7 @@ test.py is a script which runs tests on a few of the methods you will implement.
 
 In this project you will be implementing linear classifiers beginning with the Perceptron algorithm. You will begin by writing your loss function, a hinge-loss function. For this function you are given the parameters of your model θ and θ0. Additionally, you are given a feature matrix in which the rows are feature vectors and the columns are individual features, and a vector of labels representing the actual sentiment of the corresponding feature vector.
 
-## Hinge Loss on One Data Sample:
+## Hinge Loss Function for One Data Sample:
 
 First, implement the basic hinge loss calculation on a single data-point. Instead of the entire feature matrix, you are given one row, representing the feature vector of a single data sample, and its label of +1 or -1 representing the ground truth sentiment of the data sample.
 
@@ -67,3 +67,9 @@ def hinge_loss_single(feature_vector, label, theta, theta_0):
     
     raise NotImplementedError
 ```
+
+## Hinge Loss Function for a Complete Dataset:
+
+Now it's time to implement the complete hinge loss for a full set of data. Your input will be a full feature matrix this time, and you will have a vector of corresponding labels. The k-th row of the feature matrix corresponds to the k-th element of the labels vector. This function should return the appropriate loss of the classifier on the given dataset.
+
+
