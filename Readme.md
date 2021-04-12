@@ -10,4 +10,13 @@ Colons can be used to align columns.
 | Nasty No flavor. The candy is just red, No flavor. Just plan and chewy. I would never buy them again      |       -1      |
 | YUMMY! You would never guess that they're sugar-free and it's so great that you can eat them pretty much guilt free! i was so impressed that i've ordered some for myself (w dark chocolate) to take to the office. These are just EXCELLENT! |       +1      |
 
+In order to automatically analyze reviews, the following tasks to be completed first:
 
+1. Implement and compare three types of **linear classifiers**: 
+..a. **The Perceptron Algorithm,** 
+..b. **The Average Perceptron Algorithm, and**
+..c. **The PEGASOS Algorithm.
+
+Use your classifiers on the food review dataset, using some simple text features.
+
+Experiment with additional features and explore their impact on classifier performance.
