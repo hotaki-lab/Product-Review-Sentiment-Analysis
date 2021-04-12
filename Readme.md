@@ -45,6 +45,29 @@ First, implement the basic hinge loss calculation on a single data-point. Instea
 Reminder: You can implement this function locally first, and run python test.py in your sentiment_analysis directory to validate basic functionality.
 
 ```python
-s = "Python syntax highlighting"
-print s
+def hinge_loss_single(feature_vector, label, theta, theta_0):
+    """
+    Finds the hinge loss on a single data point given specific classification
+    parameters.
+
+    Args:
+        feature_vector - A numpy array describing the given data point.
+        label - A real valued number, the correct classification of the data
+            point.
+        theta - A numpy array describing the linear classifier.
+        theta_0 - A real valued number representing the offset parameter.
+
+
+    Returns: A real number representing the hinge loss associated with the
+    given data point and parameters.
+    """
+    z = label*(theta.dot(feature_vector)+theta_0)
+    singleHingeLoss = 1-z
+    
+    if z >= 1:
+        singleHingeLoss = 0
+    
+    return singleHingeLoss
+    
+    raise NotImplementedError
 ```
