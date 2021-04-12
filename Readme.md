@@ -186,7 +186,4 @@ Tip: Tracking a moving average through loops is difficult, but tracking a sum th
 
 Note: Please call get_order(feature_matrix.shape[0]), and use the ordering to iterate the feature matrix in each iteration. The ordering is specified due to grading purpose. In practice, people typically just randomly shuffle indices to do stochastic optimization.
 
-\frac{n!}{k!(n-k)!}
-$\binom{n}{k}$	\binom{n}{k}
-$\frac{\frac{x}{1}}{x - y}$	\frac{\frac{x}{1}}{x - y}
-$^3/_7$	^3/_7
+$$theta final=(1/nT)mc^2$$
