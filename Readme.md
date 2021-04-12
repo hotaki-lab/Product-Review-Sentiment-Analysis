@@ -230,7 +230,7 @@ def average_perceptron(feature_matrix, labels, T):
 ### Testing Avg. Perceptron on a Toy Dataset:
 ![alt text](https://github.com/hotaki-lab/Product-Review-Sentiment-Analysis/blob/main/Figure_1%20(avg%20perceptron).png "Avg. Perceptron Application on Toy Dataset")
 
-# PEGASOS Algorithm:
+# (c) PEGASOS Algorithm:
 
 Now you will implement the Pegasos algorithm. For more information, refer to the original paper at original paper.
 
@@ -280,7 +280,7 @@ def pegasos_single_step_update(
     raise NotImplementedError
 ```
 
-### Full Pegasos Algorithm:
+### Full PEGASOS Algorithm:
 
 Finally, you will implement the full Pegasos algorithm. You will be given the same feature matrix and labels array as you were given in Full Perceptron Algorithm. You will also be given T, the maximum number of times that you should iterate through the feature matrix before terminating the algorithm. Initialize θ and θ0 to zero. For each update, set η=1t√ where t is a counter for the number of updates performed so far (between 1 and nT inclusive). This function should return a tuple in which the first element is the final value of θ and the second element is the value of θ0.
 
@@ -320,6 +320,7 @@ def pegasos(feature_matrix, labels, T, L):
     raise NotImplementedError
 ```
 
+### Testing PEGASOS Algorithm on a Toy Dataset:
 ![alt text](https://github.com/hotaki-lab/Product-Review-Sentiment-Analysis/blob/main/Figure_1%20(pegasos)%20.png "Full PEGASOS Application on a Toy Dataset")
 
 # Convergence of 3 Algorithms Explained Above:
@@ -327,21 +328,21 @@ def pegasos(feature_matrix, labels, T, L):
 Since you have implemented three different learning algorithm for linear classifier, it is interesting to investigate which algorithm would actually converge. Please run it with a larger number of iterations T to see whether the algorithm would visually converge. You may also check whether the parameter in your theta converge in the first decimal place. Achieving convergence in longer decimal requires longer iterations, but the conclusion should be the same.
 
 **The following algorithms will converge on this dataset: **
-** 1. average perceptron algorithm
-   2. pegasos algorithm**
+**1. average perceptron algorithm**
+**2. pegasos algorithm**
 
 
-# Sentiment Analysis Project (Product Review Analysis):
+# Sentiment Analysis Project (Analyzing Amazon Reviews on a Product):
 
 Now that you have verified the correctness of your implementations, you are ready to tackle the main task of this project: building a classifier that labels reviews as positive or negative using text-based features and the linear classifiers that you implemented in the previous section!
 
-### The Data:
+## The Data:
 
 The data consists of several reviews, each of which has been labeled with −1 or +1, corresponding to a negative or positive review, respectively. The original data has been split into four files:
 
-**reviews_train.tsv (4000 examples)
-reviews_validation.tsv (500 examples)
-reviews_test.tsv (500 examples)**
+**reviews_train.tsv (4000 examples)**
+**reviews_validation.tsv (500 examples)**
+**reviews_test.tsv (500 examples)**
 
 To get a feel for how the data looks, we suggest first opening the files with a text editor, spreadsheet program, or other scientific software package (like pandas).
 Translating reviews to feature vectors
@@ -352,3 +353,184 @@ We can then transform each of the reviews into a feature vector of length d by s
 A **bag of words model** can be easily expanded to include phrases of length m. A unigram model is the case for which m=1. In the example, the unigram dictionary would be (Mary;loves;apples;red). In the bigram case, m=2, the dictionary is (Mary loves;loves apples;Red apples), and representations for each sample are (1;1;0),(0;0;1). In this section, you will only use the unigram word features. These functions are already implemented for you in the bag of words function.
 In utils.py, we have supplied you with the load data function, which can be used to read the .tsv files and returns the labels and texts. We have also supplied you with the bag_of_words function in project1.py, which takes the raw data and returns dictionary of unigram words. The resulting dictionary is an input to extract_bow_feature_vectors which computes a feature matrix of ones and zeros that can be used as the input for the classification algorithms. Using the feature matrix and your implementation of learning algorithms from before, you will be able to compute θ and θ0.
 
+## Classification:
+
+Implement a classification function that uses θ and θ0 to classify a set of data points. You are given the feature matrix, θ, and θ0 as defined in previous sections. This function should return a numpy array of -1s and 1s. If a prediction is greater than zero, it should be considered a positive classification.
+
+Available Functions: You have access to the NumPy python library as np.
+
+```
+def classify(feature_matrix, theta, theta_0):
+    
+    """
+    A classification function that uses theta and theta_0 to classify a set of
+    data points.
+    Args:
+        feature_matrix - A numpy matrix describing the given data. Each row represents a single data point. 
+        theta - A numpy array describing the linear classifier.
+        theta - A numpy array describing the linear classifier.
+        theta_0 - A real valued number representing the offset parameter.
+    Returns: A numpy array of 1s and -1s where the kth element of the array is
+    the predicted classification of the kth row of the feature matrix using the
+    given theta and theta_0. If a prediction is GREATER THAN zero, it should
+    be considered a positive classification.
+    """
+   
+    (nsamples, nfeatures) = feature_matrix.shape
+    predictions = np.zeros(nsamples)
+    for i in range(nsamples):
+        feature_vector = feature_matrix[i]
+        prediction = np.dot(theta, feature_vector) + theta_0
+        if (prediction > 0):
+            predictions[i] = 1
+        else:
+            predictions[i] = -1
+    return predictions
+    raise NotImplementedError
+```
+
+## Accuracy:
+
+We have supplied you with an accuracy function:
+
+```
+def accuracy(preds, targets):
+	"""
+	Given length-N vectors containing predicted and target labels,
+	returns the percentage and number of correct predictions.
+	"""
+	return (preds == targets).mean()
+```
+
+The accuracy function takes a numpy array of predicted labels and a numpy array of actual labels and returns the prediction accuracy. You should use this function along with the functions that you have implemented thus far in order to implement classifier_accuracy.
+
+The classifier_accuracy function should take 6 arguments:
+
+a classifier function that, itself, takes arguments (feature_matrix, labels, kwargs)
+
+the training feature matrix
+
+the validation feature matrix
+
+the training labels
+
+the valiation labels
+
+a kwargs argument to be passed to the classifier function
+
+This function should train the given classifier using the training data and then compute compute the classification accuracy on both the train and validation data. The return values should be a tuple where the first value is the training accuracy and the second value is the validation accuracy.
+
+Implement classifier accuracy in the coding box below:
+
+```
+def classifier_accuracy(
+        classifier,
+        train_feature_matrix,
+        val_feature_matrix,
+        train_labels,
+        val_labels,
+        **kwargs):
+    
+    """
+    Trains a linear classifier and computes accuracy.
+    The classifier is trained on the train data. The classifier's
+    accuracy on the train and validation data is then returned.
+    Args:
+        classifier - A classifier function that takes arguments
+            (feature matrix, labels, **kwargs) and returns (theta, theta_0)
+        train_feature_matrix - A numpy matrix describing the training
+            data. Each row represents a single data point.
+        val_feature_matrix - A numpy matrix describing the validation
+            data. Each row represents a single data point.
+        train_labels - A numpy array where the kth element of the array
+            is the correct classification of the kth row of the training
+            feature matrix.
+        val_labels - A numpy array where the kth element of the array
+            is the correct classification of the kth row of the validation
+            feature matrix.
+        **kwargs - Additional named arguments to pass to the classifier
+            (e.g. T or L)
+    Returns: A tuple in which the first element is the (scalar) accuracy of the
+    trained classifier on the training data and the second element is the
+    accuracy of the trained classifier on the validation data.
+    """
+
+    theta, theta_0 = classifier(train_feature_matrix, train_labels, **kwargs)
+    train_predictions = classify(train_feature_matrix, theta, theta_0)
+    val_predictions = classify(val_feature_matrix, theta, theta_0)
+    train_accuracy = accuracy(train_predictions, train_labels)
+    validation_accuracy = accuracy(val_predictions, val_labels)
+    return (train_accuracy, validation_accuracy)
+    raise NotImplementedError
+```
+
+## Baseline Accuracy:
+
+![alt text](https://github.com/hotaki-lab/Product-Review-Sentiment-Analysis/blob/main/Accuracy.JPG "Baseline Accuracy")
+
+## Parameter Tuning:
+
+You finally have your algorithms up and running, and a way to measure performance! But, it's still unclear what values the **hyperparameters** like T and λ should have. In this section, you'll tune these hyperparameters to maximize the performance of each model.
+
+One way to tune your hyperparameters for any given Machine Learning algorithm is to **perform a grid search** over all the possible combinations of values. If your hyperparameters can be any real number, you will need to limit the search to some finite set of possible values for each hyperparameter. For efficiency reasons, often you might want to tune one individual parameter, keeping all others constant, and then move onto the next one; Compared to a full grid search there are many fewer possible combinations to check, and this is what you'll be doing for the questions below.
+
+In main.py uncomment Problem 8 to run the staff-provided tuning algorithm from utils.py. For the purposes of this assignment, please try the following values for T: [1, 5, 10, 15, 25, 50] and the following values for λ [0.001, 0.01, 0.1, 1, 10]. For pegasos algorithm, first fix λ=0.01 to tune T, and then use the best T to tune λ
+
+## Performance After Tuning:
+
+After tuning, please enter the best T value for each of the perceptron and average percepton algorithms, and both the best T and λ for the Pegasos algorithm.
+
+Note: Just enter the values printed in your main.py. Note that for the Pegasos algorithm, the result does not reflect the best combination of T and λ.
+
+![alt text](https://github.com/hotaki-lab/Product-Review-Sentiment-Analysis/blob/main/Parameter%20Tuning.JPG "Parameter Tuning")
+
+## Accuracy on the Test Set:
+
+After you have chosen your best method (perceptron, average perceptron or Pegasos) and parameters, use this classifier to compute testing accuracy on the test set.
+
+We have supplied the feature matrix and labels in main.py as test_bow_features and test_labels.
+
+Note: In practice, the validation set is used for tuning hyperparameters while a heldout test set is the final benchmark used to compare disparate models that have already been tuned. You may notice that your results using a validation set don't always align with those of the test set, and this is to be expected.
+
+**Accuracy on the test set : 80.2 % **
+
+## The Most Explanatory Unigrams:
+
+![alt text](https://github.com/hotaki-lab/Product-Review-Sentiment-Analysis/blob/main/Unigrams.JPG "Unigrams")
+
+## Feature Engineering:
+
+Frequently, the way the data is represented can have a significant impact on the performance of a machine learning method. Try to improve the performance of your best classifier by using different features. In this problem, we will practice two simple variants of the **bag of words (BoW)** representation.
+
+## Remove Stop Words:
+
+Try to implement stop words removal in your feature engineering code. Specifically, load the file **stopwords.txt**, remove the words in the file from your dictionary, and use features constructed from the new dictionary to train your model and make predictions.
+
+Compare your result in the testing data on Pegasos algorithm using T=25 and L=0.01 when you remove the words in stopwords.txt from your dictionary.
+
+Hint: Instead of replacing the feature matrix with zero columns on stop words, you can modify the bag_of_words function to prevent adding stopwords to the dictionary
+
+Accuracy on the test set using the original dictionary: **0.802**
+Accuracy on the test set using the dictionary with stop words removed: **0.808**
+
+## Change Binary Features to Counts Features:
+
+Again, use the same learning algorithm and the same feature as the last problem. However, when you compute the feature vector of a word, use its count in each document rather than a binary indicator.
+
+Hint: You are free to modify the extract_bow_feature_vectors function to compute counts features.
+
+Accuracy on the test set using the dictionary with stop words removed and counts features: **0.77**
+
+## Some additional features that you might want to explore are:
+
+Length of the text
+
+Occurrence of all-cap words (e.g. “AMAZING", “DON'T BUY THIS")
+
+Word embeddings
+
+Besides adding new features, you can also change the original unigram feature set. For example,
+
+Threshold the number of times a word should appear in the dataset before adding them to the dictionary. For example, words that occur less than three times across the train dataset could be considered irrelevant and thus can be removed. This lets you reduce the number of columns that are prone to overfitting.
+
+There are also many other things you could change when training your model. Try anything that can help you understand the sentiment of a review. It's worth looking through the dataset and coming up with some features that may help your model. Remember that not all features will actually help so you should experiment with some simpler ones before trying anything too complicated.
