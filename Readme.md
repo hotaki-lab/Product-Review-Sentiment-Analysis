@@ -44,3 +44,7 @@ First, implement the basic hinge loss calculation on a single data-point. Instea
 
 Reminder: You can implement this function locally first, and run python test.py in your sentiment_analysis directory to validate basic functionality.
 
+```python
+s = "Python syntax highlighting"
+print s
+```
