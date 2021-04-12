@@ -133,3 +133,41 @@ def perceptron_single_step_update(
         
     raise NotImplementedError
 ```
+
+## Full Perceptron Algorithm:
+
+In this step you will implement the full perceptron algorithm. You will be given the same feature matrix and labels array as you were given in The Complete Hinge Loss. You will also be given T, the maximum number of times that you should iterate through the feature matrix before terminating the algorithm. Initialize θ and θ_0 to zero. This function should return a tuple in which the first element is the final value of θ and the second element is the value of θ0.
+
+Tip: Call the function **perceptron_single_step_update** directly without coding it again.
+
+**Hint: Make sure you initialize theta to a 1D array of shape (n,) and not a 2D array of shape (1, n).**
+
+Note: Please call get_order(feature_matrix.shape[0]), and use the ordering to iterate the feature matrix in each iteration. The ordering is specified due to grading purpose. In practice, people typically just randomly shuffle indices to do stochastic optimization.
+
+```
+def perceptron(feature_matrix, labels, T):
+    
+    """
+    Runs the full perceptron algorithm on a given set of data. Runs iterations through the data set, there is no need to worry about stopping early.
+    NOTE: Please use the previously implemented functions when applicable.
+    Do not copy paste code from previous parts.
+    NOTE: Iterate the data matrix by the orders returned by get_order(feature_matrix.shape[0])
+    Args:
+        feature_matrix -  A numpy matrix describing the given data. Each row represents a single data point. 
+        labels - A numpy array where the kth element of the array is the correct classification of the kth row of the feature matrix.
+        T - An integer indicating how many times the perceptron algorithm should iterate through the feature matrix.
+    Returns: A tuple where the first element is a numpy array with the value of theta, the linear classification parameter, after T iterations through the feature matrix and the second element is a real number with the value of theta_0, the offset classification parameter, after T iterations through the feature matrix.
+    """
+    # Your code here
+    (n, k) = feature_matrix.shape
+    theta = np.zeros(k)
+    theta_0 = 0.0
+
+    for t in range(T):
+        for i in get_order(n):
+            # Your code here
+            theta, theta_0 = perceptron_single_step_update(feature_matrix[i], labels[i], theta, theta_0)
+    return (theta, theta_0)
+        
+    raise NotImplementedError
+```
