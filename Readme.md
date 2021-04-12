@@ -33,3 +33,14 @@ main.py is a script skeleton where these functions are called and you can run yo
 utils.py contains utility functions that the staff has implemented for you.
 
 test.py is a script which runs tests on a few of the methods you will implement. Note that these tests are provided to help you debug your implementation and are not necessarily representative of the tests used for online grading. Feel free to add more test cases locally to further validate the correctness of your code before submitting to the online graders in the codeboxes.
+
+# Hinge Loss:
+
+In this project you will be implementing linear classifiers beginning with the Perceptron algorithm. You will begin by writing your loss function, a hinge-loss function. For this function you are given the parameters of your model θ and θ0. Additionally, you are given a feature matrix in which the rows are feature vectors and the columns are individual features, and a vector of labels representing the actual sentiment of the corresponding feature vector.
+
+## Hinge Loss on One Data Sample:
+
+First, implement the basic hinge loss calculation on a single data-point. Instead of the entire feature matrix, you are given one row, representing the feature vector of a single data sample, and its label of +1 or -1 representing the ground truth sentiment of the data sample.
+
+Reminder: You can implement this function locally first, and run python test.py in your sentiment_analysis directory to validate basic functionality.
+
