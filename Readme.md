@@ -178,7 +178,7 @@ def perceptron(feature_matrix, labels, T):
 
 The average perceptron will add a modification to the original perceptron algorithm: since the basic algorithm continues updating as the algorithm runs, nudging parameters in possibly conflicting directions, it is better to take an average of those parameters as the final answer. Every update of the algorithm is the same as before. The returned parameters θ, however, are an average of the θs across the nT steps:
 
-θfinal=1nT(θ(1)+θ(2)+...+θ(nT))
+**θ_final = (1 / nT) (θ1 + θ2 + ... + θnT)**
 
 You will now implement the average perceptron algorithm. This function should be constructed similarly to the Full Perceptron Algorithm above, except that it should return the average values of θ and θ0
 
@@ -186,4 +186,3 @@ Tip: Tracking a moving average through loops is difficult, but tracking a sum th
 
 Note: Please call get_order(feature_matrix.shape[0]), and use the ordering to iterate the feature matrix in each iteration. The ordering is specified due to grading purpose. In practice, people typically just randomly shuffle indices to do stochastic optimization.
 
-$$theta final=(1/nT)mc^2$$
