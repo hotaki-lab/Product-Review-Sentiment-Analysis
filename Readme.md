@@ -12,10 +12,7 @@ Colons can be used to align columns.
 
 In order to automatically analyze reviews, the following tasks to be completed first:
 
-1. Implement and compare three types of **linear classifiers**: 
-..1. **The Perceptron Algorithm,** 
-..2. **The Average Perceptron Algorithm, and**
-..3. **The PEGASOS Algorithm.
+1. Implement and compare three types of **linear classifiers**: (a) **The Perceptron Algorithm,** (b) **The Average Perceptron Algorithm, and** (c) **The PEGASOS Algorithm.
 
 Use your classifiers on the food review dataset, using some simple text features.
 
