@@ -228,6 +228,7 @@ def average_perceptron(feature_matrix, labels, T):
 ```
 
 ### Testing Avg. Perceptron on a Toy Dataset:
+
 ![alt text](https://github.com/hotaki-lab/Product-Review-Sentiment-Analysis/blob/main/Figure_1%20(avg%20perceptron).png "Avg. Perceptron Application on Toy Dataset")
 
 # (c) PEGASOS Algorithm:
