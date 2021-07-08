@@ -173,6 +173,7 @@ def perceptron(feature_matrix, labels, T):
 ```
 
 ### Testing Full Perceptron on a Toy Dataset:
+
 ![alt text](https://github.com/hotaki-lab/Product-Review-Sentiment-Analysis/blob/main/Figure_1%20(perceptron).png "Perceptron Application on Toy Dataset")
 
 # (b) Average Perceptron Algorithm:
@@ -322,6 +323,7 @@ def pegasos(feature_matrix, labels, T, L):
 ```
 
 ### Testing PEGASOS Algorithm on a Toy Dataset:
+
 ![alt text](https://github.com/hotaki-lab/Product-Review-Sentiment-Analysis/blob/main/Figure_1%20(pegasos)%20.png "Full PEGASOS Application on a Toy Dataset")
 
 # Convergence of 3 Algorithms Explained Above:
